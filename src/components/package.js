@@ -30,6 +30,7 @@ export default function Packages(props) {
     }
 
     const handleMoveUp = (index) => {
+        
         if (index > 0) {
             const shippingOrder = { ...sortedPackages[index], shippingOrder: sortedPackages[index - 1].shippingOrder };
             const firstOrder = { ...sortedPackages[index - 1], shippingOrder: sortedPackages[index].shippingOrder };
@@ -60,8 +61,15 @@ export default function Packages(props) {
         }
     };
 
-
+    const handleDelete = (id) => {
+        updateData(prev => ({
+            ...prev,
+            packages: prev.packages.filter(pkg => pkg.id !== id)
+        }));
+    };
+    
     const handleAddCustomer = (newcpackage) => {
+       
         setShippingOrder(shippingOrder + 1);
         updateData(prevState => ({
             ...prevState,
@@ -74,6 +82,7 @@ export default function Packages(props) {
         setWeight('');
         setCustomerId('');
         setId('');
+    
     }
     return (
         <div>
@@ -111,7 +120,8 @@ export default function Packages(props) {
                                     <TableCell>{row.weight}</TableCell>
                                     <TableCell>{row.price}</TableCell>
                                     <TableCell>
-                                        <Button variant="contained" >Delete</Button>
+                                        <Button variant="contained"     onClick={() => handleDelete(row.id)}
+ >Delete</Button>
                                         <IconButton
                                             size="large"
                                             edge="start"
@@ -141,7 +151,7 @@ export default function Packages(props) {
                 <div className="modal-content">
                     <span className="close" onClick={() => setShowModal(false)}>    &times;    </span>
                     <h2>Add Customer</h2>
-                    <form onSubmit={(e) => { e.preventDefault(); handleAddCustomer({ id: +id, weight, customerid: +customerid, price: +price, shippingOrder }); }} >
+                    <form onSubmit={(e) => { e.preventDefault(); handleAddCustomer({ id: 'pak'+id, weight:weight+'kg', customerid: +customerid, price: +price, shippingOrder }); }} >
                         <label htmlFor="id">Id:</label>
                         <input type="text" id="id" name="id" value={id} onChange={(e) => setId(e.target.value)} required />
 
