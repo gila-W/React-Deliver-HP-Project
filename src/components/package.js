@@ -120,8 +120,7 @@ export default function Packages(props) {
                                     <TableCell>{row.weight}</TableCell>
                                     <TableCell>{row.price}</TableCell>
                                     <TableCell>
-                                        <Button variant="contained"     onClick={() => handleDelete(row.id)}
- >Delete</Button>
+                                        <Button variant="contained" onClick={() => handleDelete(row.id)}>Delete</Button>
                                         <IconButton
                                             size="large"
                                             edge="start"
